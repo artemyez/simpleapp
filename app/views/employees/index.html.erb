@@ -1,6 +1,12 @@
 
 <%= link_to "Add employee", new_employee_path, class: 'btn btn-sm btn-primary' %>
 <%= link_to "Add department", new_department_path, class: 'btn btn-sm btn-primary' %>
+<%= form_tag employees_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 <div class="col-lg-6">
   <table class="table">
     <thead>
@@ -19,8 +25,8 @@
         <td><%= e.name %></td>
         <td><%= e.active %></td>
         <td><%= e.department.name %></td>
-        <td><%= link_to 'Delete', employee_path(e), class: 'btn btn-light',
-                      data: {:confirm => 'Are you sure?'}, :method => :destroy %>
+        <td><%= link_to 'Delete', employee_path(e), method: :delete,
+                      data: {:confirm => 'Are you sure?'}, class: 'btn btn-light'%>
             <%= link_to('Edit', edit_employee_path(e), class: 'btn btn-light') %></td>
       </tr>
       <% end %>

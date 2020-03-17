@@ -2,7 +2,11 @@ class EmployeesController < ApplicationController
   before_action :find_employee
 
   def index
-    @employee = Employee.all
+    if params[:search]
+      @employee = Employee.search(params[:search])
+    else
+      @employee = Employee.all
+    end
   end
 
   def new
@@ -31,7 +35,7 @@ class EmployeesController < ApplicationController
 
   def destroy
     @employee.destroy
-    #redirect_to employee_path
+      redirect_to root_path
   end
 
 
@@ -41,7 +45,7 @@ class EmployeesController < ApplicationController
   end
 
   def employee_params
-    params.require(:employees).permit(:name, :active, :department_id)
+    params.require(:employee).permit(:name, :active, :department_id)
   end
 
 

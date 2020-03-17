@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-6">
-    <%= form_for (Employees.new), url: employees_path do |f| %>
+    <%= form_for (Employee.new), url: employees_path do |f| %>
       <div class="form-group">
         <%= f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Choose category'}, {:class => "form-control"} %>
       </div>

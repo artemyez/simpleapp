@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-sm-6">
+<div class="row p-3 col px-md-4">
+  <div class="col-sm-3 p-3 border bg-light">
     <%= form_for (Employee.new), url: employees_path do |f| %>
       <div class="form-group">
         <%= f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Choose category'}, {:class => "form-control"} %>
@@ -10,7 +10,7 @@
       </div>
       <div class="form-group">
         <%= f.label "Active" %>
-        <%= f.text_area :active, class: "form-control", :required => true %>
+        <%= f.check_box :active, {}, 'yes', 'no' %>
       </div>
       <%= f.submit "Save", class: "btn btn-primary" %>
       <%= link_to "Back", employees_path, class: "btn btn-light" %>

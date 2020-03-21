@@ -1,36 +1,38 @@
-  <div class="col-lg-6 p-3">
-    <p>
-      <%= link_to "Add employee", new_employee_path, class: 'btn btn-sm btn-primary' %>
-      <%= link_to "Add department", new_department_path, class: 'btn btn-sm btn-primary' %>
-    </p>
-    <div>
-      <%= form_tag employees_path, :method => 'get' do %>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
+<div class="col-lg-6 p-3">
+<p>
+  <%= link_to "Add employee", new_employee_path, class: 'btn btn-sm btn-primary' %>
+  <%= link_to "Add department", new_department_path, class: 'btn btn-sm btn-primary' %>
+</p>
+<div>
+  <%= form_tag employees_path, :method => 'get' do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Active</th>
+      <th scope="col">Department</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employee.each do |e| %>
+    <tr>
+      <td><%= e.id %></td>
+      <td><%= e.name %></td>
+      <td><%= e.active %></td>
+      <td><%= e.department.name %></td>
+      <td><%= link_to 'Delete', employee_path(e), method: :delete,
+        data: {:confirm => 'Are you sure?'}, class: 'btn btn-light'%>
+        <%= link_to('Edit', edit_employee_path(e), class: 'btn btn-light') %></td>
+      </tr>
       <% end %>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Active</th>
-          <th scope="col">Department</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @employee.each do |e| %>
-        <tr>
-          <td><%= e.id %></td>
-          <td><%= e.name %></td>
-          <td><%= e.active %></td>
-          <td><%= e.department.name %></td>
-          <td><%= link_to 'Delete', employee_path(e), method: :delete,
-            data: {:confirm => 'Are you sure?'}, class: 'btn btn-light'%>
-            <%= link_to('Edit', edit_employee_path(e), class: 'btn btn-light') %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    </tbody>
+  </table>
+</div>
+
+<%== pagy_bootstrap_nav(@pagy) %>

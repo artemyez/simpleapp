@@ -3,9 +3,9 @@ class EmployeesController < ApplicationController
 
   def index
     if params[:search]
-      @employee = Employee.search(params[:search])
+      @pagy, @employee = pagy(Employee.search(params[:search]))
     else
-      @employee = Employee.all
+      @pagy, @employee = pagy(Employee.all, items: 4)
     end
   end
 

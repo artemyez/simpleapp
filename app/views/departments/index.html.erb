@@ -14,25 +14,19 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
-      <th scope="col">Active</th>
-      <th scope="col">Department</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% @employees.each do |e| %>
+    <% @departments.each do |d| %>
     <tr>
-      <td><%= e.id %></td>
-      <td><%= e.name %></td>
-      <td><%= e.active %></td>
-      <td><%= e.department.name %></td>
-      <td><%= link_to 'Delete', employee_path(e), method: :delete,
+      <td><%= d.id %></td>
+      <td><%= d.name %></td>
+      <td><%= link_to 'Delete', department_path(d), method: :delete,
         data: { confirm: 'Are you sure?' }, class: 'btn btn-light'%>
-        <%= link_to('Edit', edit_employee_path(e), class: 'btn btn-light') %></td>
+        <%= link_to('Edit', edit_department_path(d), class: 'btn btn-light') %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<%== pagy_bootstrap_nav(@pagy) %>
